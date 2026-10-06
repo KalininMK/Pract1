@@ -66,9 +66,14 @@ public final class Shell {
     /** Prints the command name and its arguments. */
     private void printStub(String name, List<String> args) {
         String joined = args.stream()
-                .map(arg -> "\"" + arg + "\"")
+                .map(Shell::quote)
                 .collect(Collectors.joining(", "));
         out.println(name + ": [" + joined + "]");
+    }
+
+    /** Wraps an argument in double quotes and escapes quotes and backslashes. */
+    private static String quote(String arg) {
+        return "\"" + arg.replace("\\", "\\\\").replace("\"", "\\\"") + "\"";
     }
 
     /** Stops the shell. */

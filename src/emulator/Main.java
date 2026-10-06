@@ -1,29 +1,25 @@
 package emulator;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 /** Entry point of the shell emulator. */
 public final class Main {
-    private static final String DEFAULT_VFS_NAME = "vfs";
-
     private Main() {
     }
 
     /**
-     * Starts the interactive emulator.
+     * Starts the emulator with the standard streams.
      *
-     * @param args command line arguments (unused at this stage)
-     * @throws IOException if reading the standard input fails
+     * @param args command line arguments: {@code --vfs} and {@code --script}
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+        PrintStream err = new PrintStream(System.err, true, StandardCharsets.UTF_8);
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(System.in, StandardCharsets.UTF_8));
-        Shell shell = new Shell(DEFAULT_VFS_NAME, out);
-        new Repl(shell, in, out).run();
+        System.exit(Application.run(args, in, out, err));
     }
 }

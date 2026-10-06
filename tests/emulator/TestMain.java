@@ -14,6 +14,9 @@ public final class TestMain {
     public static void main(String[] args) throws Exception {
         TokenizerTest.run();
         ShellTest.run();
+        ArgsParserTest.run();
+        CommentStripperTest.run();
+        ApplicationTest.run();
         System.exit(Check.finish(System.out));
     }
 }

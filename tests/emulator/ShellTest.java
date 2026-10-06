@@ -7,7 +7,8 @@ import java.nio.charset.StandardCharsets;
 /** Tests for {@link Shell}. */
 final class ShellTest {
     private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-    private final Shell shell = new Shell("demo", new PrintStream(buffer, true, StandardCharsets.UTF_8));
+    private final Shell shell = new Shell(
+            "demo", new PrintStream(buffer, true, StandardCharsets.UTF_8));
 
     private ShellTest() {
     }
@@ -40,6 +41,8 @@ final class ShellTest {
         Check.equal("ls args", "ls: [\"a\", \"b c\"]\n", output());
         shell.execute("cd '/tmp/x y'");
         Check.equal("cd quoted", "cd: [\"/tmp/x y\"]\n", output());
+        shell.execute("ls 'say \"hi\"'");
+        Check.equal("ls escaped", "ls: [\"say \\\"hi\\\"\"]\n", output());
     }
 
     /** Verifies error messages. */

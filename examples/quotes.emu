@@ -1,0 +1,7 @@
+// Аргументы в кавычках
+ls "my documents" 'other dir'
+cd "/tmp/dir with spaces"
+ls "say \"hi\"" 'it'"'"'s' a\ b
+ls ""
+ls "a // not a comment" // а это комментарий
+exit

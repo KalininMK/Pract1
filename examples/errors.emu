@@ -1,0 +1,8 @@
+// Ошибки внутри скрипта не прерывают его выполнение
+foo bar
+ls "unterminated
+cd 'unterminated
+ls trailing\
+exit now
+ls still works
+exit
