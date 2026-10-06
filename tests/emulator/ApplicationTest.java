@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/** End-to-end tests for {@link Application}. */
+/** Сквозные тесты для {@link Application}. */
 final class ApplicationTest {
     private final ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errBuffer = new ByteArrayOutputStream();
@@ -17,7 +17,7 @@ final class ApplicationTest {
     private ApplicationTest() {
     }
 
-    /** Runs all application checks. */
+    /** Выполняет все проверки приложения. */
     static void run() throws IOException {
         ApplicationTest test = new ApplicationTest();
         test.checkDebugOutput();
@@ -25,7 +25,7 @@ final class ApplicationTest {
         test.checkErrors();
     }
 
-    /** Runs the application and returns its exit code. */
+    /** Запускает приложение и возвращает его код возврата. */
     private int start(String input, String... args) {
         outBuffer.reset();
         errBuffer.reset();
@@ -34,17 +34,17 @@ final class ApplicationTest {
         return Application.run(args, new BufferedReader(new StringReader(input)), out, err);
     }
 
-    /** Returns captured standard output with normalized newlines. */
+    /** Возвращает перехваченный стандартный вывод с нормализованными переводами строк. */
     private String out() {
         return outBuffer.toString(StandardCharsets.UTF_8).replace("\r\n", "\n");
     }
 
-    /** Returns captured error output with normalized newlines. */
+    /** Возвращает перехваченный вывод ошибок с нормализованными переводами строк. */
     private String err() {
         return errBuffer.toString(StandardCharsets.UTF_8).replace("\r\n", "\n");
     }
 
-    /** Verifies the debug output of all parameters. */
+    /** Проверяет отладочный вывод всех параметров. */
     private void checkDebugOutput() {
         int code = start("exit\n", "--vfs", "d/demo.json");
         Check.equal("code", Application.EXIT_OK, code);
@@ -53,7 +53,7 @@ final class ApplicationTest {
         Check.isTrue("prompt", out().contains("[demo]$ "));
     }
 
-    /** Verifies the dialog produced by a startup script. */
+    /** Проверяет диалог, который выводит стартовый скрипт. */
     private void checkScript() throws IOException {
         Path script = Files.createTempFile("startup", ".emu");
         Files.writeString(script, "// comment\nls \"a b\" // tail\n\nfoo\nexit\nls\n");
@@ -66,7 +66,7 @@ final class ApplicationTest {
         Check.isTrue("stops after exit", !out().contains("ls: []"));
     }
 
-    /** Verifies reported errors and exit codes. */
+    /** Проверяет сообщения об ошибках и коды возврата. */
     private void checkErrors() {
         Check.equal("usage code", Application.EXIT_USAGE, start("", "--bad"));
         Check.isTrue("usage msg", err().startsWith("error: unknown option: --bad\n"));

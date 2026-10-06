@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Checks quoting in the startup script and in interactive input.
+# Проверяет кавычки в стартовом скрипте и в интерактивном вводе.
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
 section "--vfs and --script with quotes"

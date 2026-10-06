@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
-/** Tests for {@link Shell}. */
+/** Тесты для {@link Shell}. */
 final class ShellTest {
     private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     private final Shell shell = new Shell(
@@ -13,12 +13,12 @@ final class ShellTest {
     private ShellTest() {
     }
 
-    /** Runs all shell checks. */
+    /** Выполняет все проверки оболочки. */
     static void run() {
         new ShellTest().checkAll();
     }
 
-    /** Executes all checks on a fresh shell. */
+    /** Выполняет все проверки на новой оболочке. */
     private void checkAll() {
         Check.equal("prompt", "[demo]$ ", shell.prompt());
         checkStubs();
@@ -26,14 +26,14 @@ final class ShellTest {
         checkExit();
     }
 
-    /** Returns and clears the captured output with normalized newlines. */
+    /** Возвращает и очищает перехваченный вывод с нормализованными переводами строк. */
     private String output() {
         String text = buffer.toString(StandardCharsets.UTF_8).replace("\r\n", "\n");
         buffer.reset();
         return text;
     }
 
-    /** Verifies the ls and cd stubs. */
+    /** Проверяет заглушки ls и cd. */
     private void checkStubs() {
         shell.execute("ls");
         Check.equal("ls no args", "ls: []\n", output());
@@ -45,7 +45,7 @@ final class ShellTest {
         Check.equal("ls escaped", "ls: [\"say \\\"hi\\\"\"]\n", output());
     }
 
-    /** Verifies error messages. */
+    /** Проверяет сообщения об ошибках. */
     private void checkErrors() {
         shell.execute("foo bar");
         Check.equal("unknown", "foo: command not found\n", output());
@@ -55,7 +55,7 @@ final class ShellTest {
         Check.equal("blank", "", output());
     }
 
-    /** Verifies the exit command. */
+    /** Проверяет команду exit. */
     private void checkExit() {
         shell.execute("exit now");
         Check.equal("exit args", "exit: too many arguments\n", output());

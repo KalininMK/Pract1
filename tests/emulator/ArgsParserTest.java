@@ -3,19 +3,19 @@ package emulator;
 import java.nio.file.Path;
 import java.util.Optional;
 
-/** Tests for {@link ArgsParser} and {@link Config}. */
+/** Тесты для {@link ArgsParser} и {@link Config}. */
 final class ArgsParserTest {
     private ArgsParserTest() {
     }
 
-    /** Runs all argument parser checks. */
+    /** Выполняет все проверки разбора аргументов. */
     static void run() throws ConfigException {
         checkValid();
         checkVfsName();
         checkInvalid();
     }
 
-    /** Verifies accepted argument forms. */
+    /** Проверяет допустимые формы аргументов. */
     private static void checkValid() throws ConfigException {
         Config empty = ArgsParser.parse(new String[] {});
         Check.equal("no vfs", Optional.empty(), empty.vfsPath());
@@ -25,7 +25,7 @@ final class ArgsParserTest {
         Check.equal("script", Optional.of(Path.of("s.emu")), both.scriptPath());
     }
 
-    /** Verifies the VFS name shown in the prompt. */
+    /** Проверяет имя VFS в приглашении. */
     private static void checkVfsName() throws ConfigException {
         Check.equal("default", "vfs", ArgsParser.parse(new String[] {}).vfsName());
         Check.equal("ext", "demo", named("dir/demo.json"));
@@ -34,12 +34,12 @@ final class ArgsParserTest {
         Check.equal("hidden", ".json", named("/tmp/.json"));
     }
 
-    /** Returns the VFS name for a path given on the command line. */
+    /** Возвращает имя VFS для пути из командной строки. */
     private static String named(String path) throws ConfigException {
         return ArgsParser.parse(new String[] {"--vfs", path}).vfsName();
     }
 
-    /** Verifies rejected argument lists. */
+    /** Проверяет отклоняемые списки аргументов. */
     private static void checkInvalid() {
         Check.isTrue("unknown", fails("--foo"));
         Check.isTrue("positional", fails("file.json"));
@@ -48,7 +48,7 @@ final class ArgsParserTest {
         Check.isTrue("duplicate", fails("--vfs", "a", "--vfs", "b"));
     }
 
-    /** Tells whether parsing the arguments is rejected. */
+    /** Проверяет, отклоняется ли разбор аргументов. */
     private static boolean fails(String... args) {
         try {
             ArgsParser.parse(args);

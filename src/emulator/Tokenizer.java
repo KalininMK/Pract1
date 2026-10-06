@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Splits an input line into tokens.
+ * Разбивает строку ввода на токены.
  *
- * <p>Tokens are separated by whitespace. Single quotes keep everything
- * literally, double quotes allow {@code \"} and {@code \\} escapes, and a
- * backslash outside quotes escapes the next character.
+ * <p>Токены разделяются пробельными символами. Одинарные кавычки сохраняют всё как есть, двойные
+ * допускают экранирование {@code \"} и {@code \\}, а обратная косая черта вне кавычек экранирует
+ * следующий символ.
  */
 public final class Tokenizer {
     private static final char DOUBLE_QUOTE = '"';
@@ -26,17 +26,17 @@ public final class Tokenizer {
     }
 
     /**
-     * Splits the line into tokens.
+     * Разбивает строку на токены.
      *
-     * @param line raw input line
-     * @return list of tokens, empty for a blank line
-     * @throws ParseException if a quote or an escape is not terminated
+     * @param line исходная строка ввода
+     * @return список токенов, пустой для пустой строки
+     * @throws ParseException если кавычка или экранирование не завершены
      */
     public static List<String> tokenize(String line) throws ParseException {
         return new Tokenizer(line).run();
     }
 
-    /** Scans the whole line and returns the collected tokens. */
+    /** Просматривает всю строку и возвращает собранные токены. */
     private List<String> run() throws ParseException {
         while (pos < line.length()) {
             char c = line.charAt(pos++);
@@ -56,13 +56,13 @@ public final class Tokenizer {
         return tokens;
     }
 
-    /** Appends a character to the current token. */
+    /** Добавляет символ к текущему токену. */
     private void append(char c) {
         current.append(c);
         inToken = true;
     }
 
-    /** Finishes the current token, if there is one. */
+    /** Завершает текущий токен, если он есть. */
     private void flush() {
         if (inToken) {
             tokens.add(current.toString());
@@ -71,7 +71,7 @@ public final class Tokenizer {
         }
     }
 
-    /** Reads text up to the closing single quote. */
+    /** Читает текст до закрывающей одинарной кавычки. */
     private void readSingleQuoted() throws ParseException {
         inToken = true;
         while (pos < line.length()) {
@@ -84,7 +84,7 @@ public final class Tokenizer {
         throw new ParseException("unterminated single quote");
     }
 
-    /** Reads text up to the closing double quote. */
+    /** Читает текст до закрывающей двойной кавычки. */
     private void readDoubleQuoted() throws ParseException {
         inToken = true;
         while (pos < line.length()) {
@@ -101,7 +101,7 @@ public final class Tokenizer {
         throw new ParseException("unterminated double quote");
     }
 
-    /** Handles a backslash that appears inside double quotes. */
+    /** Обрабатывает обратную косую черту внутри двойных кавычек. */
     private void readEscapedInQuotes() throws ParseException {
         if (pos >= line.length()) {
             throw new ParseException("unterminated double quote");
@@ -113,7 +113,7 @@ public final class Tokenizer {
         current.append(next);
     }
 
-    /** Handles a backslash that appears outside quotes. */
+    /** Обрабатывает обратную косую черту вне кавычек. */
     private void readEscaped() throws ParseException {
         if (pos >= line.length()) {
             throw new ParseException("dangling backslash at end of line");

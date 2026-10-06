@@ -9,18 +9,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * Executes a startup script and shows it as a dialog: every command is
- * printed after the prompt, followed by its output.
+ * Выполняет стартовый скрипт и показывает его как диалог: каждая команда выводится после
+ * приглашения, затем её результат.
  */
 public final class ScriptRunner {
     private final Shell shell;
     private final PrintStream out;
 
     /**
-     * Creates the runner.
+     * Создаёт исполнитель скрипта.
      *
-     * @param shell shell that executes the commands
-     * @param out stream for the echoed input
+     * @param shell оболочка, выполняющая команды
+     * @param out поток для вывода повторённого ввода
      */
     public ScriptRunner(Shell shell, PrintStream out) {
         this.shell = shell;
@@ -28,12 +28,12 @@ public final class ScriptRunner {
     }
 
     /**
-     * Runs the script until it ends or the shell stops. Blank lines and
-     * comments are skipped. A failing command is reported by the shell and
-     * the script continues with the next line.
+     * Выполняет скрипт, пока он не закончится или оболочка не остановится. Пустые строки и
+     * комментарии пропускаются. Ошибка команды выводится оболочкой, скрипт продолжается со
+     * следующей строки.
      *
-     * @param script path to the script file
-     * @throws IOException if the script cannot be read
+     * @param script путь к файлу скрипта
+     * @throws IOException если скрипт не удаётся прочитать
      */
     public void run(Path script) throws IOException {
         for (String raw : readLines(script)) {
@@ -49,7 +49,7 @@ public final class ScriptRunner {
         }
     }
 
-    /** Reads all script lines and explains read failures. */
+    /** Читает все строки скрипта и поясняет ошибки чтения. */
     private static List<String> readLines(Path script) throws IOException {
         try {
             return Files.readAllLines(script, StandardCharsets.UTF_8);

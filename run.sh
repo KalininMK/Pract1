@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the emulator when sources changed and starts it with the given args.
+# Собирает эмулятор при изменении исходников и запускает его с переданными аргументами.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

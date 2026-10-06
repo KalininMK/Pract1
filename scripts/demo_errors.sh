@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Checks error handling for parameters and for startup script contents.
+# Проверяет обработку ошибок в параметрах и в содержимом стартового скрипта.
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
 section "errors inside the script (valid --vfs and --script)"

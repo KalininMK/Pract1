@@ -4,18 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-/** Interactive read-eval-print loop on top of a {@link Shell}. */
+/** Интерактивный цикл «чтение — выполнение — вывод» поверх {@link Shell}. */
 public final class Repl {
     private final Shell shell;
     private final BufferedReader in;
     private final PrintStream out;
 
     /**
-     * Creates the loop.
+     * Создаёт цикл.
      *
-     * @param shell shell that executes the lines
-     * @param in source of user input
-     * @param out stream for the prompt
+     * @param shell оболочка, выполняющая строки
+     * @param in источник пользовательского ввода
+     * @param out поток для приглашения
      */
     public Repl(Shell shell, BufferedReader in, PrintStream out) {
         this.shell = shell;
@@ -24,9 +24,9 @@ public final class Repl {
     }
 
     /**
-     * Reads and executes lines until the shell stops or the input ends.
+     * Читает и выполняет строки, пока оболочка не остановится или ввод не закончится.
      *
-     * @throws IOException if reading the input fails
+     * @throws IOException если чтение ввода не удалось
      */
     public void run() throws IOException {
         while (shell.isRunning()) {

@@ -2,13 +2,13 @@ package emulator;
 
 import java.util.List;
 
-/** A shell command that can be executed with a list of arguments. */
+/** Команда оболочки, выполняемая со списком аргументов. */
 @FunctionalInterface
 public interface Command {
     /**
-     * Runs the command.
+     * Выполняет команду.
      *
-     * @param args arguments without the command name
+     * @param args аргументы без имени команды
      */
     void run(List<String> args);
 }

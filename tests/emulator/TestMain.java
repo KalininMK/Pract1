@@ -1,15 +1,15 @@
 package emulator;
 
-/** Runs all tests and exits with a non-zero code on failure. */
+/** Запускает все тесты и завершается с ненулевым кодом при ошибке. */
 public final class TestMain {
     private TestMain() {
     }
 
     /**
-     * Entry point of the test run.
+     * Точка входа запуска тестов.
      *
-     * @param args unused
-     * @throws Exception if a test fails unexpectedly
+     * @param args не используются
+     * @throws Exception если тест неожиданно завершился ошибкой
      */
     public static void main(String[] args) throws Exception {
         TokenizerTest.run();

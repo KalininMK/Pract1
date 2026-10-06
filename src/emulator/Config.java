@@ -4,18 +4,18 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 /**
- * Parameters of one emulator run.
+ * Параметры одного запуска эмулятора.
  *
- * @param vfsPath physical location of the VFS, if given
- * @param scriptPath path to the startup script, if given
+ * @param vfsPath физическое расположение VFS, если задано
+ * @param scriptPath путь к стартовому скрипту, если задан
  */
 public record Config(Optional<Path> vfsPath, Optional<Path> scriptPath) {
     private static final String DEFAULT_VFS_NAME = "vfs";
     private static final char EXTENSION_SEPARATOR = '.';
 
     /**
-     * Returns the VFS name used in the prompt: the file name of the VFS
-     * without its last extension, or {@code vfs} when no VFS is given.
+     * Возвращает имя VFS для приглашения: имя файла VFS без последнего расширения или {@code vfs},
+     * если VFS не задана.
      */
     public String vfsName() {
         return vfsPath
@@ -26,7 +26,7 @@ public record Config(Optional<Path> vfsPath, Optional<Path> scriptPath) {
                 .orElse(DEFAULT_VFS_NAME);
     }
 
-    /** Removes the last extension from a file name. */
+    /** Удаляет последнее расширение из имени файла. */
     private static String stripExtension(String fileName) {
         int dot = fileName.lastIndexOf(EXTENSION_SEPARATOR);
         return dot > 0 ? fileName.substring(0, dot) : fileName;

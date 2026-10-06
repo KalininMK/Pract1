@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** Executes command lines and keeps the state of the emulated shell. */
+/** Выполняет командные строки и хранит состояние эмулируемой оболочки. */
 public final class Shell {
     private final String vfsName;
     private final PrintStream out;
@@ -14,10 +14,10 @@ public final class Shell {
     private boolean running = true;
 
     /**
-     * Creates a shell and registers the built-in commands.
+     * Создаёт оболочку и регистрирует встроенные команды.
      *
-     * @param vfsName name shown in the prompt
-     * @param out stream for command output and error messages
+     * @param vfsName имя, показываемое в приглашении
+     * @param out поток для вывода команд и сообщений об ошибках
      */
     public Shell(String vfsName, PrintStream out) {
         this.vfsName = vfsName;
@@ -27,21 +27,21 @@ public final class Shell {
         commands.put("exit", this::exit);
     }
 
-    /** Returns the input prompt, which contains the VFS name. */
+    /** Возвращает приглашение к вводу, содержащее имя VFS. */
     public String prompt() {
         return "[" + vfsName + "]$ ";
     }
 
-    /** Tells whether the shell accepts more commands. */
+    /** Проверяет, принимает ли оболочка новые команды. */
     public boolean isRunning() {
         return running;
     }
 
     /**
-     * Parses and executes one input line. Errors are reported to the output
-     * stream and never abort the shell.
+     * Разбирает и выполняет одну строку ввода. Ошибки выводятся в выходной поток и не останавливают
+     * оболочку.
      *
-     * @param line raw input line
+     * @param line исходная строка ввода
      */
     public void execute(String line) {
         List<String> tokens;
@@ -63,7 +63,7 @@ public final class Shell {
         command.run(tokens.subList(1, tokens.size()));
     }
 
-    /** Prints the command name and its arguments. */
+    /** Выводит имя команды и её аргументы. */
     private void printStub(String name, List<String> args) {
         String joined = args.stream()
                 .map(Shell::quote)
@@ -71,12 +71,12 @@ public final class Shell {
         out.println(name + ": [" + joined + "]");
     }
 
-    /** Wraps an argument in double quotes and escapes quotes and backslashes. */
+    /** Заключает аргумент в двойные кавычки и экранирует кавычки и обратные косые черты. */
     private static String quote(String arg) {
         return "\"" + arg.replace("\\", "\\\\").replace("\"", "\\\"") + "\"";
     }
 
-    /** Stops the shell. */
+    /** Останавливает оболочку. */
     private void exit(List<String> args) {
         if (!args.isEmpty()) {
             out.println("exit: too many arguments");

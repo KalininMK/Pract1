@@ -4,26 +4,26 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-/** Wires configuration, startup script and interactive loop together. */
+/** Связывает конфигурацию, стартовый скрипт и интерактивный цикл. */
 public final class Application {
-    /** Exit code of a normal termination. */
+    /** Код возврата при штатном завершении. */
     public static final int EXIT_OK = 0;
-    /** Exit code when reading the startup script fails. */
+    /** Код возврата при ошибке чтения стартового скрипта. */
     public static final int EXIT_IO_ERROR = 1;
-    /** Exit code for invalid command line parameters. */
+    /** Код возврата при неверных параметрах командной строки. */
     public static final int EXIT_USAGE = 2;
 
     private Application() {
     }
 
     /**
-     * Runs the emulator.
+     * Запускает эмулятор.
      *
-     * @param args command line arguments
-     * @param in source of interactive input
-     * @param out stream for normal output
-     * @param err stream for fatal errors
-     * @return process exit code
+     * @param args аргументы командной строки
+     * @param in источник интерактивного ввода
+     * @param out поток для обычного вывода
+     * @param err поток для критических ошибок
+     * @return код завершения процесса
      */
     public static int run(String[] args, BufferedReader in, PrintStream out, PrintStream err) {
         Config config;

@@ -2,7 +2,7 @@ package emulator;
 
 import java.io.PrintStream;
 
-/** Prints the effective emulator parameters at startup. */
+/** Выводит действующие параметры эмулятора при запуске. */
 public final class DebugPrinter {
     private static final String NOT_SET = "<not set>";
 
@@ -10,10 +10,10 @@ public final class DebugPrinter {
     }
 
     /**
-     * Prints all parameters, one per line.
+     * Выводит все параметры, по одному в строке.
      *
-     * @param config parameters of the run
-     * @param out destination stream
+     * @param config параметры запуска
+     * @param out поток вывода
      */
     public static void print(Config config, PrintStream out) {
         out.println("[debug] " + ArgsParser.VFS_OPTION + " = "

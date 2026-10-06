@@ -1,11 +1,11 @@
 package emulator;
 
-/** Tests for {@link CommentStripper}. */
+/** Тесты для {@link CommentStripper}. */
 final class CommentStripperTest {
     private CommentStripperTest() {
     }
 
-    /** Runs all comment stripping checks. */
+    /** Выполняет все проверки удаления комментариев. */
     static void run() {
         Check.equal("full line", "", CommentStripper.strip("// note"));
         Check.equal("trailing", "ls -l ", CommentStripper.strip("ls -l // list"));

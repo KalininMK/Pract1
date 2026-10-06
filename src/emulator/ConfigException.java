@@ -1,13 +1,13 @@
 package emulator;
 
-/** Signals invalid command line parameters. */
+/** Сообщает о неверных параметрах командной строки. */
 public final class ConfigException extends Exception {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Creates the exception.
+     * Создаёт исключение.
      *
-     * @param message human readable description of the problem
+     * @param message описание проблемы для человека
      */
     public ConfigException(String message) {
         super(message);

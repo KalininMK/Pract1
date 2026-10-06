@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-/** Parses command line arguments into a {@link Config}. */
+/** Разбирает аргументы командной строки в {@link Config}. */
 public final class ArgsParser {
-    /** Option with the physical path to the VFS. */
+    /** Параметр с физическим путём к VFS. */
     public static final String VFS_OPTION = "--vfs";
-    /** Option with the path to the startup script. */
+    /** Параметр с путём к стартовому скрипту. */
     public static final String SCRIPT_OPTION = "--script";
-    /** Short usage text. */
+    /** Краткая справка по использованию. */
     public static final String USAGE =
             "usage: emulator [--vfs <path>] [--script <path>]";
 
@@ -25,12 +25,12 @@ public final class ArgsParser {
     }
 
     /**
-     * Parses the arguments. Options accept both {@code --name value} and
-     * {@code --name=value} forms.
+     * Разбирает аргументы. Параметры принимаются в формах {@code --имя значение} и {@code
+     * --имя=значение}.
      *
-     * @param args raw command line arguments
-     * @return parsed configuration
-     * @throws ConfigException on unknown, duplicated or incomplete options
+     * @param args исходные аргументы командной строки
+     * @return разобранная конфигурация
+     * @throws ConfigException при неизвестных, повторяющихся или неполных параметрах
      */
     public static Config parse(String[] args) throws ConfigException {
         Map<String, String> values = new HashMap<>();
@@ -43,7 +43,7 @@ public final class ArgsParser {
                 toPath(SCRIPT_OPTION, values.get(SCRIPT_OPTION)));
     }
 
-    /** Reads one option and returns the index of the next unread argument. */
+    /** Читает один параметр и возвращает индекс следующего непрочитанного аргумента. */
     private static int readOption(String[] args, int index, Map<String, String> values)
             throws ConfigException {
         String arg = args[index];
@@ -67,7 +67,7 @@ public final class ArgsParser {
         return valueIndex + 1;
     }
 
-    /** Converts an optional raw value to a path. */
+    /** Преобразует необязательное исходное значение в путь. */
     private static Optional<Path> toPath(String option, String raw) throws ConfigException {
         if (raw == null) {
             return Optional.empty();

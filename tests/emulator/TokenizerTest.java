@@ -2,12 +2,12 @@ package emulator;
 
 import java.util.List;
 
-/** Tests for {@link Tokenizer}. */
+/** Тесты для {@link Tokenizer}. */
 final class TokenizerTest {
     private TokenizerTest() {
     }
 
-    /** Runs all tokenizer checks. */
+    /** Выполняет все проверки токенизатора. */
     static void run() throws ParseException {
         checkPlainSplit();
         checkQuotes();
@@ -15,14 +15,14 @@ final class TokenizerTest {
         checkErrors();
     }
 
-    /** Verifies splitting on whitespace. */
+    /** Проверяет разбиение по пробельным символам. */
     private static void checkPlainSplit() throws ParseException {
         Check.equal("simple", List.of("ls", "-l", "dir"), Tokenizer.tokenize("ls -l dir"));
         Check.equal("spaces", List.of("a", "b"), Tokenizer.tokenize("  a \t  b  "));
         Check.equal("blank", List.of(), Tokenizer.tokenize("   "));
     }
 
-    /** Verifies quoted arguments. */
+    /** Проверяет аргументы в кавычках. */
     private static void checkQuotes() throws ParseException {
         Check.equal("double", List.of("cd", "my dir"), Tokenizer.tokenize("cd \"my dir\""));
         Check.equal("single", List.of("cd", "my dir"), Tokenizer.tokenize("cd 'my dir'"));
@@ -31,7 +31,7 @@ final class TokenizerTest {
         Check.equal("nested", List.of("it's"), Tokenizer.tokenize("\"it's\""));
     }
 
-    /** Verifies backslash handling. */
+    /** Проверяет обработку обратной косой черты. */
     private static void checkEscapes() throws ParseException {
         Check.equal("space", List.of("a b"), Tokenizer.tokenize("a\\ b"));
         Check.equal("quote", List.of("say \"hi\""), Tokenizer.tokenize("\"say \\\"hi\\\"\""));
@@ -39,14 +39,14 @@ final class TokenizerTest {
         Check.equal("single", List.of("a\\b"), Tokenizer.tokenize("'a\\b'"));
     }
 
-    /** Verifies that broken quoting is rejected. */
+    /** Проверяет, что неверные кавычки отклоняются. */
     private static void checkErrors() {
         Check.isTrue("open double", fails("ls \"abc"));
         Check.isTrue("open single", fails("ls 'abc"));
         Check.isTrue("dangling", fails("ls abc\\"));
     }
 
-    /** Tells whether tokenizing the line throws a parse error. */
+    /** Проверяет, приводит ли токенизация строки к ошибке разбора. */
     private static boolean fails(String line) {
         try {
             Tokenizer.tokenize(line);

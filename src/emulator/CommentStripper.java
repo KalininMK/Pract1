@@ -1,8 +1,8 @@
 package emulator;
 
 /**
- * Removes {@code //} comments from script lines. A comment starts at a
- * {@code //} that is at the beginning of a word and is not inside quotes.
+ * Удаляет комментарии {@code //} из строк скрипта. Комментарий начинается с {@code //} в начале
+ * слова вне кавычек.
  */
 public final class CommentStripper {
     private static final String COMMENT_MARKER = "//";
@@ -15,10 +15,10 @@ public final class CommentStripper {
     }
 
     /**
-     * Cuts the comment off a line.
+     * Отрезает комментарий от строки.
      *
-     * @param line script line
-     * @return the line without comment
+     * @param line строка скрипта
+     * @return строка без комментария
      */
     public static String strip(String line) {
         char quote = NO_QUOTE;
@@ -37,7 +37,7 @@ public final class CommentStripper {
         return line;
     }
 
-    /** Tells whether a comment begins at the given position. */
+    /** Проверяет, начинается ли комментарий в данной позиции. */
     private static boolean startsComment(String line, int index) {
         boolean wordStart = index == 0 || Character.isWhitespace(line.charAt(index - 1));
         return wordStart && line.startsWith(COMMENT_MARKER, index);

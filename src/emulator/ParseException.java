@@ -1,13 +1,13 @@
 package emulator;
 
-/** Signals that an input line cannot be split into command and arguments. */
+/** Сообщает, что строку ввода нельзя разбить на команду и аргументы. */
 public final class ParseException extends Exception {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Creates the exception.
+     * Создаёт исключение.
      *
-     * @param message human readable description of the syntax error
+     * @param message описание синтаксической ошибки для человека
      */
     public ParseException(String message) {
         super(message);

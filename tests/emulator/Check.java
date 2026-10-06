@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/** Minimal assertion helper that records failures instead of throwing. */
+/** Минимальный помощник для проверок: записывает ошибки вместо выброса исключений. */
 final class Check {
     private static final int EXIT_OK = 0;
     private static final int EXIT_FAILED = 1;
@@ -15,7 +15,7 @@ final class Check {
     private Check() {
     }
 
-    /** Compares two values and records a failure if they differ. */
+    /** Сравнивает два значения и фиксирует ошибку, если они различаются. */
     static void equal(String label, Object expected, Object actual) {
         total++;
         if (!Objects.equals(expected, actual)) {
@@ -23,12 +23,12 @@ final class Check {
         }
     }
 
-    /** Records a failure if the condition is false. */
+    /** Фиксирует ошибку, если условие ложно. */
     static void isTrue(String label, boolean condition) {
         equal(label, true, condition);
     }
 
-    /** Prints the summary and returns the process exit code. */
+    /** Выводит итог и возвращает код завершения процесса. */
     static int finish(PrintStream out) {
         FAILURES.forEach(failure -> out.println("FAIL " + failure));
         out.println("checks: " + total + ", failed: " + FAILURES.size());

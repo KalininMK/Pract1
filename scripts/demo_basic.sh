@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Checks both parameters, alone and together, in both option forms.
+# Проверяет оба параметра по отдельности и вместе, в обеих формах записи.
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
 section "no parameters"

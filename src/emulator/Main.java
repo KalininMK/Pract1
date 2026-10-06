@@ -5,15 +5,15 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
-/** Entry point of the shell emulator. */
+/** Точка входа эмулятора оболочки. */
 public final class Main {
     private Main() {
     }
 
     /**
-     * Starts the emulator with the standard streams.
+     * Запускает эмулятор со стандартными потоками.
      *
-     * @param args command line arguments: {@code --vfs} and {@code --script}
+     * @param args аргументы командной строки: {@code --vfs} и {@code --script}
      */
     public static void main(String[] args) {
         PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
